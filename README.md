@@ -31,7 +31,7 @@ The following **additional** features are implemented:
 
 Here's a walkthrough of implemented user stories:
 
-<img src='http://i.imgur.com/link/to/your/gif/file.gif' title='Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://imgur.com/a/FPVjbcc' title='Video Walkthrough' width='' alt='Video Walkthrough' />
 
 
 GIF created with ...  
@@ -40,11 +40,11 @@ GIF created with ...
 
 ## Notes
 
-Describe any challenges encountered while building the app.
+Was confused on the task, Tried some other stuff but ultimately went back to the lab step by step to fill in the gaps.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2022] [Favour Adekoya]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
