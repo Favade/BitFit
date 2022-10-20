@@ -7,4 +7,10 @@
     <string name="enter_food">Enter Food</string>
     <string name="calories_tv">Calories</string>
     <string name="add_new_food">Add new Food</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="average_calories">Average Calories:</string>
+    <string name="minimum_calories">Minimum Calories:</string>
+    <string name="maximum_calories">Maximum Calories:</string>
+    <string name="clear_data">Clear data</string>
 </resources>

@@ -7,6 +7,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface FoodDetailDao {
+
     @Query("SELECT * FROM food_tracker")
     fun getAll(): Flow<List<FoodDetailsEntity>>
 
@@ -18,4 +19,13 @@ interface FoodDetailDao {
 
     @Query("DELETE FROM food_tracker")
     fun deleteAll()
+
+    @Query("SELECT AVG(food_calories) as calories FROM food_tracker")
+    fun averageCalories(): Int
+
+    @Query("SELECT MIN(food_calories) as calories FROM food_tracker")
+    fun minCalories(): Int
+
+    @Query("SELECT MAX(food_calories) as calories FROM food_tracker")
+    fun maxCalories(): Int
 }

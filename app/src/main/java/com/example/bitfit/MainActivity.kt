@@ -4,46 +4,49 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.coroutines.Dispatchers.IO
 import kotlinx.coroutines.launch
 
-
 class MainActivity : AppCompatActivity() {
-    val data = mutableListOf<FoodDetailsEntity>()
+    private val food = mutableListOf<FoodDetailsEntity>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val foodRv = findViewById<RecyclerView>(R.id.rvFoodItems)
-        val addNewMain = findViewById<Button>(R.id.btnAddNewFood)
-        foodRv.layoutManager = LinearLayoutManager(this)
-        foodRv.adapter = FoodDetailAdapter(this,data)
+        val fragmentManager: FragmentManager = supportFragmentManager
 
-        addNewMain.setOnClickListener {
-            Intent(this, AddFoodActivity::class.java).also {
-                startActivity(it)
+
+        val logFragment: Fragment = LogFragment()
+        val dashboardFragment: Fragment = DashboardFragment()
+
+        val bottomNavigationView: BottomNavigationView = findViewById(R.id.bottom_navigation)
+
+        bottomNavigationView.setOnItemSelectedListener { item ->
+            lateinit var fragment: Fragment
+            when (item.itemId) {
+                R.id.nav_log -> fragment = logFragment
+                R.id.nav_dashboard -> fragment = dashboardFragment
             }
+            fragmentManager.beginTransaction().replace(R.id.rlContainer, fragment).commit()
+            true
         }
 
-        lifecycleScope.launch {
-            (application as FoodApplication).database.foodDao().getAll().collect { databaseList ->
-                databaseList.map { entity ->
-                    FoodDetailsEntity(
-                        entity.foodName,
-                        entity.foodCalories
-                    )
-                }.also { mappedList ->
-                    data.clear()
-                    data.addAll(mappedList)
-                    foodRv.adapter ?.notifyDataSetChanged()
-                }
-            }
-        }
+        // Set default selection
+        bottomNavigationView.selectedItemId = R.id.nav_log
     }
 
+    private fun replaceFragment(foodListFragment: LogFragment) {
+        val fragmentManager = supportFragmentManager
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame_layout, foodListFragment)
+        fragmentTransaction.commit()
 
+    }
 }
